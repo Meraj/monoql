@@ -2,6 +2,7 @@ package Monoql
 
 import (
 	"context"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"time"
@@ -58,4 +59,11 @@ func (m Monoql) UpdateMany(filter interface{},document []interface{})(*mongo.Upd
 func (m Monoql) NewCTX() context.Context{
 	ctx,_:= context.WithTimeout(context.Background(), 10*time.Second)
 	return ctx
+}
+
+func (m Monoql) ConvertObjectIDToString(InsertedID interface{}) (string,bool){
+	if oid, ok := InsertedID.(primitive.ObjectID); ok {
+		return oid.String(),true
+	}
+	return "",false
 }
