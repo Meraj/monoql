@@ -44,3 +44,19 @@ func (m monoql) FindOne (filter interface{}) *mongo.SingleResult {
 func (m monoql) Find (filter interface{}) (*mongo.Cursor, error){
 	return m.Coll.Find(m.ctx,filter)
 }
+func (m monoql) InsertOne(document interface{}) (*mongo.InsertOneResult, error){
+	return m.Coll.InsertOne(m.ctx,document)
+}
+
+func (m monoql) InsertMany(document []interface{}) (*mongo.InsertManyResult, error){
+	return m.Coll.InsertMany(m.ctx,document)
+}
+func (m monoql) UpdateOne(filter interface{},document interface{})(*mongo.UpdateResult, error) {
+	return m.Coll.UpdateOne(m.ctx,filter,document)
+}
+func (m monoql) UpdateByID(id interface{},document interface{})(*mongo.UpdateResult, error) {
+	return m.Coll.UpdateByID(m.ctx,id,document)
+}
+func (m monoql) UpdateMany(filter interface{},document []interface{})(*mongo.UpdateResult, error) {
+	return m.Coll.UpdateMany(m.ctx,filter,document)
+}
