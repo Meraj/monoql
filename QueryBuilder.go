@@ -56,6 +56,10 @@ func (m Monoql) UpdateByID(id interface{},document interface{})(*mongo.UpdateRes
 func (m Monoql) UpdateMany(filter interface{},document []interface{})(*mongo.UpdateResult, error) {
 	return m.Coll.UpdateMany(m.NewCTX(),filter,document)
 }
+func (m Monoql) Aggregate(filter interface{})(*mongo.Cursor, error) {
+	return m.Coll.Aggregate(m.NewCTX(),filter)
+}
+
 func (m Monoql) NewCTX() context.Context{
 	ctx,_:= context.WithTimeout(context.Background(), 10*time.Second)
 	return ctx
