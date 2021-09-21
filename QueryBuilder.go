@@ -2,7 +2,6 @@ package Monoql
 
 import (
 	"context"
-	"fmt"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"time"
@@ -19,13 +18,10 @@ type Query struct {
 	CollectionName string
 }
 
-func (m Monoql) Connect(options *options.ClientOptions) *Monoql{
+func (m Monoql) Connect(options *options.ClientOptions) (*Monoql,error){
 	client, err := mongo.Connect(m.NewCTX(), options)
-	if err != nil{
-		fmt.Printf("%v \n",err.Error())
-	}
 	m.Client = client
-	return &m
+	return &m,err
 }
 func (m Monoql) Database (name string) *Monoql {
 	m.query.DBName = name
