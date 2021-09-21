@@ -61,9 +61,9 @@ func (m Monoql) NewCTX() context.Context{
 	return ctx
 }
 
-func (m Monoql) ConvertObjectIDToString(InsertedID interface{}) (string,bool){
+func (m Monoql) ConvertObjectID(InsertedID interface{}) (primitive.ObjectID,bool){
 	if oid, ok := InsertedID.(primitive.ObjectID); ok {
-		return oid.String(),true
+		return oid,true
 	}
-	return "",false
+	return primitive.ObjectID{},false
 }
