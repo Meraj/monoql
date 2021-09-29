@@ -5,6 +5,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
+
 	"time"
 )
 type Monoql struct {
@@ -37,8 +38,8 @@ func (m Monoql) Collection(name string) *Monoql{
 func (m Monoql) FindOne (filter interface{}) *mongo.SingleResult {
 	return m.Coll.FindOne(m.NewCTX(),filter)
 }
-func (m Monoql) Find (filter interface{}) (*mongo.Cursor, error){
-	return m.Coll.Find(m.NewCTX(),filter)
+func (m Monoql) Find (filter interface{}, Options ...*options.FindOptions) (*mongo.Cursor, error){
+	return m.Coll.Find(m.NewCTX(),filter,Options...)
 }
 func (m Monoql) InsertOne(document interface{}) (*mongo.InsertOneResult, error){
 	return m.Coll.InsertOne(m.NewCTX(),document)
