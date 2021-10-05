@@ -60,7 +60,12 @@ func (m Monoql) UpdateMany(filter interface{},document []interface{})(*mongo.Upd
 func (m Monoql) Aggregate(filter interface{})(*mongo.Cursor, error) {
 	return m.Coll.Aggregate(m.NewCTX(),filter)
 }
-
+func (m Monoql) DeleteOne (filter interface{}, Options ...*options.DeleteOptions) (*mongo.DeleteResult, error){
+	return m.Coll.DeleteOne(m.NewCTX(),filter,Options...)
+}
+func (m Monoql) DeleteMany (filter interface{}, Options ...*options.DeleteOptions) (*mongo.DeleteResult, error){
+	return m.Coll.DeleteMany(m.NewCTX(),filter,Options...)
+}
 func (m Monoql) NewCTX() context.Context{
 	ctx,_:= context.WithTimeout(context.Background(), 10*time.Second)
 	return ctx
